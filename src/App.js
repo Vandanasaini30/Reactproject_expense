@@ -1,38 +1,45 @@
-import React from "react";
+import React, {useState} from "react";
 //import NewExpense from "./components/NewExpenses/NewExpense";
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpenses/NewExpense";
-const App=()=> {
-  const items = [
+
+  const Dummy_expenses = [
     {
+      id:'e1',
       title: "life insurance",
       amount: 2345,
       date: new Date(2021, 3, 4),
       location: "net-banking",
     },
     {
+      id:'e2',
       title: "car insurance",
       amount: 1234,
       date: new Date(2023, 3, 12),
       location: "net-banking",
     },
     {
+      id:'e3',
       title: "health insurance",
       amount: 6789,
       date: new Date(2021, 3, 12),
       location: "net-banking",
     },
     {
+      id:'e4',
       title: "life term insurance",
       amount: 4567,
       date: new Date(2021, 3, 23),
       location: "net-banking",
     },
   ];
+  const App=()=> {
+    const[expenses,setExpenses]=useState(Dummy_expenses);
    
  const addExpenseHandler= expense=>{
-  console.log("In App.js");
-  console.log(expense);
+  setExpenses((preExpenses)=>{
+    return[expense, ...preExpenses];
+  });
  }
 
 
@@ -44,8 +51,8 @@ const App=()=> {
   );*/
    return(
      <div>
-      <NewExpense onAddExpense={addExpenseHandler}></NewExpense>
-     <Expenses item={items}></Expenses>
+      <NewExpense onAddExpense={addExpenseHandler}/>
+     <Expenses item={expenses}/>
   </div>
   );
 }
